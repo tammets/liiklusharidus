@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Õppematerjalid - Liiklusharidus.ee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50">
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="flex items-center">
+                        <img src="images/lovable-uploads/865d5543-5cf5-4664-bcd8-b0e008337f3b.png"
+                            alt="Transpordiamet logo" class="h-10 w-auto">
+                    </div>
+                </a>
+
+                <!-- Desktop menu -->
+                <div class="hidden md:flex space-x-1">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Avaleht
+                    </a>
+                    <a href="materials.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-100 text-blue-700 shadow-sm">
+                        Materjalid
+                    </a>
+                    <a href="content-bundles.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Sisukimbud
+                    </a>
+                    <a href="teacher-workbook.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Õpetaja tööraamat
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="relative p-2">
+                        <svg id="menu-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div
+                    class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm border-t border-slate-200 rounded-b-lg">
+                    <a href="index.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Avaleht
+                    </a>
+                    <a href="materials.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium bg-blue-100 text-blue-700">
+                        Materjalid
+                    </a>
+                    <a href="content-bundles.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Sisukimbud
+                    </a>
+                    <a href="teacher-workbook.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Õpetaja tööraamat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="min-h-screen bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-slate-800 mb-4">Õppematerjalid</h1>
+                <p class="text-xl text-slate-600">
+                    Leia sobivad liiklushariduse materjalid oma ainetundi
+                </p>
+            </div>
+
+            <!-- Search and filters -->
+            <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-8">
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+                    <div class="lg:col-span-2">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input type="text" placeholder="Otsi materjale..."
+                                class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                onkeyup="filterMaterials()">
+                        </div>
+                    </div>
+
+                    <select
+                        class="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        onchange="filterMaterials()">
+                        <option value="">Kategooria</option>
+                        <option value="Arutelu">Arutelu</option>
+                        <option value="Ülesanne">Ülesanne</option>
+                        <option value="Kordamine">Kordamine</option>
+                        <option value="Mäng">Mäng</option>
+                    </select>
+
+                    <select
+                        class="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        onchange="filterMaterials()">
+                        <option value="">Lõiming</option>
+                        <option value="Eesti keel">Eesti keel</option>
+                        <option value="Kirjandus">Kirjandus</option>
+                        <option value="Inimeseõpetus">Inimeseõpetus</option>
+                        <option value="Liikumisõpetus">Liikumisõpetus</option>
+                    </select>
+
+                    <select
+                        class="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        onchange="filterMaterials()">
+                        <option value="">Kooliaste</option>
+                        <option value="I kooliaste">I kooliaste</option>
+                        <option value="II kooliaste">II kooliaste</option>
+                        <option value="III kooliaste">III kooliaste</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <p class="text-slate-600" id="results-count">
+                        Leitud 6 materjali
+                    </p>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="materials-grid">
+                    <!-- Material 1 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Sõnu liiklusest 3" data-category="Ülesanne,Kordamine"
+                        data-subject="Eesti keel,Inimeseõpetus" data-grade="I kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/12a38d0c-56bf-434f-a020-01488c349ff5.png"
+                                alt="Sõnu liiklusest 3" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">I
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Sõnu liiklusest 3
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Kirjeldab enda ja oma pere liiklemise harjumusi; Kirjeldab enda teekonda
+                                kodust kooli vastavalt oma liikumisviisile ja toob välja, millised on tema jaoks
+                                keerulised kohad liikluses, sh kooli ümbruses
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Ülesanne</span>
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Kordamine</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Eesti
+                                        keel</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Inimeseõpetus</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=1"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 2 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Enne rattasõitu" data-category="Ülesanne,Kordamine" data-subject="Eesti keel"
+                        data-grade="I kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/3fefb442-788a-43b6-8493-48b274d797df.png"
+                                alt="Enne rattasõitu" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">I
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Enne rattasõitu
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Selgitab ja saab aru kiivri kandmise vajalikkusest jalg- ja tõukerattaga,
+                                tasakaaluliikuri jms sõitmisel; Kirjeldab enda ja oma pere liiklemise harjumusi
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Ülesanne</span>
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Kordamine</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Eesti
+                                        keel</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=2"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 3 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Liiklejatüübid" data-category="Arutelu,Mäng"
+                        data-subject="Inimeseõpetus,Liikumisõpetus" data-grade="I kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/ffe368f2-1e89-4fa2-b966-5a03626effd3.png"
+                                alt="Liiklejatüübid" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">I
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Liiklejatüübid
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Nimetab reeglid, millega on vaja arvestada üksi ja ühiselt liigeldes (nt
+                                ekskursioonil, matkal, ühistranspordis, õppekäigul)
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Arutelu</span>
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Mäng</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Inimeseõpetus</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Liikumisõpetus</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=3"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 4 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Vanasõnad" data-category="Ülesanne" data-subject="Kirjandus"
+                        data-grade="II kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/d506940a-f626-4086-8a6a-523b1fce8b1f.png" alt="Vanasõnad"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">II
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Vanasõnad
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Analüüsib (eneseanalüüsi, vaatluse vm meetodi abil) enda ja kaasõpilaste
+                                käitumist liikluses jalakäija ja jalgratturina erinevates liikluskeskkondades
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Ülesanne</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Kirjandus</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=4"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 5 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Olen ettevaatlik liikleja" data-category="Ülesanne" data-subject="Eesti keel"
+                        data-grade="I kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/d6038e96-296c-4ce6-a40e-4eae32534bea.png"
+                                alt="Olen ettevaatlik liikleja" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">I
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Olen ettevaatlik liikleja
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Kirjeldab enda ja oma pere liiklemise harjumusi
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Ülesanne</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Eesti
+                                        keel</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=5"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material 6 -->
+                    <div class="material-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200"
+                        data-title="Piiratud nähtavus talvel" data-category="Ülesanne" data-subject="Eesti keel"
+                        data-grade="I kooliaste">
+                        <div class="aspect-video relative overflow-hidden rounded-t-lg">
+                            <img src="images/lovable-uploads/1bd806b3-2908-4409-8009-81e319b0b01a.png"
+                                alt="Piiratud nähtavus talvel" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">I
+                                        kooliaste</span>
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-800 mb-2 leading-tight">
+                                Piiratud nähtavus talvel
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4">
+                                Õpiväljundid: Saab aru, et ohutu käitumine liikluses aitab vältida õnnetusi ning
+                                valikute korral eelistab käituda ohutult; Kirjeldab (jalakäijana) liiklusohte erinevatel
+                                aastaaegadel
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full">Ülesanne</span>
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full">Eesti
+                                        keel</span>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <a href="material-detail.html?id=6"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        Vaata
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-slate-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold mb-4">
+                Liitu meie kogukonnaga
+            </h3>
+            <p class="text-xl text-slate-300 mb-8">
+                Saa osa üleriigilisest liiklushariduse võrgustikust ja aita kujundada
+                turvalisemat liikluskeskkonda.
+            </p>
+
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="YouTube">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Facebook">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-pink-600 hover:bg-pink-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447c0-1.297.49-2.448 1.297-3.323.875-.807 2.026-1.297 3.323-1.297 1.297 0 2.448.49 3.323 1.297.807.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.448-1.297 3.323-.875.807-2.026 1.297-3.323 1.297zm7.83-9.404c-.49 0-.875-.385-.875-.875 0-.49.385-.875.875-.875.49 0 .875.385.875.875 0 .49-.385.875-.875.875zm-4.262 9.404c-2.448 0-4.427-1.979-4.427-4.427 0-2.448 1.979-4.427 4.427-4.427 2.448 0 4.427 1.979 4.427 4.427 0 2.448-1.979 4.427-4.427 4.427z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

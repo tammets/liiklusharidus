@@ -1,13 +1,454 @@
 <!DOCTYPE html>
 <html lang="et">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liiklusharidus.ee - Turvaline liiklus algab Sinust</title>
-    <meta http-equiv="refresh" content="0; url=static-index.html">
-    <link rel="canonical" href="static-index.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
 </head>
-<body>
-    <p>Kui leht ei laadi automaatselt, <a href="static-index.html">klõpsake siia</a>.</p>
+
+<body class="bg-slate-50">
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="flex items-center">
+                        <img src="images/lovable-uploads/865d5543-5cf5-4664-bcd8-b0e008337f3b.png"
+                            alt="Transpordiamet logo" class="h-10 w-auto">
+                    </div>
+                </a>
+
+                <!-- Desktop menu -->
+                <div class="hidden md:flex space-x-1">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-100 text-blue-700 shadow-sm">
+                        Avaleht
+                    </a>
+                    <a href="materials.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Materjalid
+                    </a>
+                    <a href="content-bundles.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Sisukimbud
+                    </a>
+                    <a href="teacher-workbook.html"
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Õpetaja tööraamat
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="relative p-2">
+                        <svg id="menu-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div
+                    class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm border-t border-slate-200 rounded-b-lg">
+                    <a href="index.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium bg-blue-100 text-blue-700">
+                        Avaleht
+                    </a>
+                    <a href="materials.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Materjalid
+                    </a>
+                    <a href="content-bundles.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Sisukimbud
+                    </a>
+                    <a href="teacher-workbook.html"
+                        class="block px-4 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        Õpetaja tööraamat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+        <!-- Hero Section -->
+        <section
+            class="relative py-20 px-4 bg-gradient-to-br from-emerald-600 via-blue-600 to-blue-800 text-white overflow-hidden">
+            <!-- Background image with overlay -->
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style="background-image: url('images/lovable-uploads/8f83df01-79a9-4a1a-8098-7d2b5aa6ffd6.png')">
+                </div>
+                <!-- Gradient overlay -->
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/90 via-blue-600/85 to-blue-800/90">
+                </div>
+                <!-- Subtle pattern overlay -->
+                <div class="absolute inset-0 opacity-10"
+                    style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;">
+                </div>
+            </div>
+
+            <!-- Animated background elements -->
+            <div class="absolute inset-0">
+                <!-- Geometric shapes -->
+                <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
+                <div class="absolute top-32 right-16 w-16 h-16 bg-white/10 rounded-full animate-pulse"></div>
+                <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-green-300/15 rounded-full"></div>
+                <div class="absolute bottom-32 right-1/3 w-8 h-8 bg-orange-300/20 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <div class="mb-6">
+                    <div
+                        class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-4 border border-white/20">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium">Liiklusharidus.ee</span>
+                    </div>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
+                    Turvaline liiklus <br>
+                    <span class="text-emerald-200">algab Sinust</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl mb-8 text-blue-50 max-w-4xl mx-auto leading-relaxed drop-shadow-md">
+                    Avasta kvaliteetseid õppematerjale ja tööriistu liiklusohutuse
+                    õpetamiseks ja õppimiseks kõikidele kooliastmetele. Kõik materjalid vastavad
+                    Eesti õppekavadega ja parimatele praktikatele.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <a href="materials.html"
+                        class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium bg-white text-blue-700 hover:bg-blue-50 shadow-xl hover:shadow-2xl transition-all duration-300 rounded-lg">
+                        Sirvi materjale
+                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="teacher-workbook.html"
+                        class="inline-flex items-center justify-center px-6 py-3 text-lg font-medium border border-white/50 text-white hover:bg-white hover:text-blue-700 bg-white/15 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
+                        Juhend õpetajale
+                    </a>
+                </div>
+
+                <!-- Quick stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-center">
+                    <div class="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-lg">
+                        <div class="text-2xl font-bold text-emerald-200">250+</div>
+                        <div class="text-sm text-blue-100">Õppematerjali</div>
+                    </div>
+                    <div class="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-lg">
+                        <div class="text-2xl font-bold text-yellow-200">25+</div>
+                        <div class="text-sm text-blue-100">Sisukimpu</div>
+                    </div>
+                    <div class="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-lg">
+                        <div class="text-2xl font-bold text-orange-200">4</div>
+                        <div class="text-sm text-blue-100">Kooliastet</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main features section -->
+        <section class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">
+                    Liiklushariduse lahendused igale koolile
+                </h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                    Meie platvorm pakub kõike vajalikku kvaliteetse liiklushariduse läbiviimiseks -
+                    alates interaktiivsetest õppematerjalidest kuni praktiliste juhenditeni.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature Card 1 -->
+                <div
+                    class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden group">
+                    <div class="p-6">
+                        <div
+                            class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Õpetaja tööraamat</h3>
+                        <p class="text-slate-600 mb-4">Praktilised juhised materjalide kasutamiseks ja integreerimiseks
+                        </p>
+                        <a href="teacher-workbook.html"
+                            class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                            Vaata lähemalt
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div
+                    class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden group">
+                    <div class="p-6">
+                        <div
+                            class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Õppematerjalid</h3>
+                        <p class="text-slate-600 mb-4">Leia sobivaid materjale oma tundidesse kooliastme ja aine järgi
+                        </p>
+                        <a href="materials.html"
+                            class="inline-flex items-center text-green-600 hover:text-green-700 font-medium">
+                            Vaata lähemalt
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div
+                    class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 overflow-hidden group">
+                    <div class="p-6">
+                        <div
+                            class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800 mb-2">Sisukimbud</h3>
+                        <p class="text-slate-600 mb-4">Valmis materjalide kogumikud erinevate teemade jaoks</p>
+                        <a href="content-bundles.html"
+                            class="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium">
+                            Vaata lähemalt
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educational approach section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-slate-800 mb-6">
+                            Miks on liiklusharidus oluline?
+                        </h3>
+                        <div class="space-y-4 text-slate-600">
+                            <p class="text-lg leading-relaxed">
+                                Liiklusharidus on oluline alus laste ohutuse tagamiseks liikluses.
+                                Meie materjalid aitavad lastel omandada vajalikke teadmisi ja oskusi
+                                turvaliseks osalemiseks liikluses.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Ohutus esmalt</h4>
+                                        <p class="text-sm text-slate-600">Turvalisuse põhimõtted ja reeglid</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Praktilised oskused</h4>
+                                        <p class="text-sm text-slate-600">Reaalse elu situatsioonid</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Koostöö</h4>
+                                        <p class="text-sm text-slate-600">Õpetajate ja lastevanemate kaasamine</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div
+                                        class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-slate-800">Kvaliteet</h4>
+                                        <p class="text-sm text-slate-600">Õppekavaga kohandatud sisu</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-blue-500 to-emerald-500 rounded-2xl p-8 text-white">
+                            <div class="absolute top-4 right-4 opacity-20">
+                                <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-4">Alusta kohe!</h4>
+                            <p class="mb-6 text-blue-100">
+                                Tutvu meie materjalidega ja alusta oma esimese liiklushariduse tunni planeerimist juba
+                                täna.
+                            </p>
+                            <a href="materials.html"
+                                class="inline-flex items-center px-6 py-3 bg-white text-blue-600 hover:bg-blue-50 rounded-lg font-medium">
+                                Vaata materjale
+                                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-slate-800 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold mb-4">
+                Liitu meie kogukonnaga
+            </h3>
+            <p class="text-xl text-slate-300 mb-8">
+                Saa osa üleriigilisest liiklushariduse võrgustikust ja aita kujundada
+                turvalisemat liikluskeskkonda.
+            </p>
+
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="YouTube">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Facebook">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                    class="w-12 h-12 bg-pink-600 hover:bg-pink-700 rounded-full flex items-center justify-center transition-colors duration-200"
+                    aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447c0-1.297.49-2.448 1.297-3.323.875-.807 2.026-1.297 3.323-1.297 1.297 0 2.448.49 3.323 1.297.807.875 1.297 2.026 1.297 3.323 0 1.297-.49 2.448-1.297 3.323-.875.807-2.026 1.297-3.323 1.297zm7.83-9.404c-.49 0-.875-.385-.875-.875 0-.49.385-.875.875-.875.49 0 .875.385.875.875 0 .49-.385.875-.875.875zm-4.262 9.404c-2.448 0-4.427-1.979-4.427-4.427 0-2.448 1.979-4.427 4.427-4.427 2.448 0 4.427 1.979 4.427 4.427 0 2.448-1.979 4.427-4.427 4.427z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
+
 </html>
