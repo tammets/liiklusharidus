@@ -112,56 +112,117 @@ function loadMaterialData() {
     const materials = {
         '1': {
             title: 'Sõnu liiklusest 3',
-            description: 'Õpiväljundid: Kirjeldab enda ja oma pere liiklemise harjumusi; Kirjeldab enda teekonda kodust kooli vastavalt oma liikumisviisile ja toob välja, millised on tema jaoks keerulised kohad liikluses, sh kooli ümbruses',
             grade: 'I kooliaste',
             image: 'images/lovable-uploads/12a38d0c-56bf-434f-a020-01488c349ff5.png',
             categories: ['Ülesanne', 'Kordamine'],
-            subjects: ['Eesti keel', 'Inimeseõpetus']
+            subjects: ['Eesti keel', 'Inimeseõpetus'],
+            theme: 'Liiklusohutus',
+            keywords: ['liiklus', 'ohutus', 'harjumused', 'koolitee'],
+            learningOutcomes: [
+                'Kirjeldab enda ja oma pere liiklemise harjumusi',
+                'Kirjeldab enda teekonda kodust kooli vastavalt oma liikumisviisile',
+                'Toob välja keerulised kohad liikluses, sh kooli ümbruses'
+            ]
         },
         '2': {
             title: 'Enne rattasõitu',
-            description: 'Õpiväljundid: Selgitab ja saab aru kiivri kandmise vajalikkusest jalg- ja tõukerattaga, tasakaaluliikuri jms sõitmisel; Kirjeldab enda ja oma pere liiklemise harjumusi',
             grade: 'I kooliaste',
             image: 'images/lovable-uploads/3fefb442-788a-43b6-8493-48b274d797df.png',
             categories: ['Ülesanne', 'Kordamine'],
-            subjects: ['Eesti keel']
+            subjects: ['Eesti keel'],
+            theme: 'Jalgratturi ohutus',
+            keywords: ['ratas', 'kiiver', 'ohutus', 'kontroll'],
+            learningOutcomes: [
+                'Selgitab ja saab aru kiivri kandmise vajalikkusest',
+                'Kirjeldab enda ja oma pere liiklemise harjumusi'
+            ]
         },
         '3': {
             title: 'Liiklejatüübid',
-            description: 'Õpiväljundid: Nimetab reeglid, millega on vaja arvestada üksi ja ühiselt liigeldes (nt ekskursioonil, matkal, ühistranspordis, õppekäigul)',
             grade: 'I kooliaste',
             image: 'images/lovable-uploads/ffe368f2-1e89-4fa2-b966-5a03626effd3.png',
             categories: ['Arutelu', 'Mäng'],
-            subjects: ['Inimeseõpetus', 'Liikumisõpetus']
+            subjects: ['Inimeseõpetus', 'Liikumisõpetus'],
+            theme: 'Liiklejad ja reeglid',
+            keywords: ['liiklejad', 'reeglid', 'koostöö', 'transport'],
+            learningOutcomes: [
+                'Nimetab reeglid, millega on vaja arvestada üksi ja ühiselt liigeldes',
+                'Tunneb ära erinevaid liiklejatüüpe'
+            ]
         }
     };
     
     const material = materials[materialId] || materials['1'];
     
-    document.getElementById('material-title').textContent = material.title;
-    document.getElementById('title').textContent = material.title;
-    document.getElementById('description').textContent = material.description;
-    document.getElementById('grade-badge').textContent = material.grade;
-    document.getElementById('material-image').src = material.image;
-    document.getElementById('material-image').alt = material.title;
+    // Update title
+    const titleElement = document.getElementById('title');
+    if (titleElement) titleElement.textContent = material.title;
     
-    // Load tags
-    const tagsContainer = document.getElementById('tags-container');
-    tagsContainer.innerHTML = '';
+    // Update image
+    const imageElement = document.getElementById('material-image');
+    if (imageElement) {
+        imageElement.src = material.image;
+        imageElement.alt = material.title;
+    }
     
-    material.categories.forEach(category => {
-        const tag = document.createElement('span');
-        tag.className = 'px-2 py-1 bg-blue-100 text-blue-800 border border-blue-200 text-xs rounded-full';
-        tag.textContent = category;
-        tagsContainer.appendChild(tag);
-    });
+    // Update grade badge
+    const gradeBadge = document.getElementById('grade-badge');
+    if (gradeBadge) gradeBadge.textContent = material.grade;
     
-    material.subjects.forEach(subject => {
-        const tag = document.createElement('span');
-        tag.className = 'px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full';
-        tag.textContent = subject;
-        tagsContainer.appendChild(tag);
-    });
+    // Update theme
+    const themeElement = document.getElementById('theme');
+    if (themeElement) themeElement.textContent = material.theme;
+    
+    // Load category tags
+    const categoryContainer = document.getElementById('category-tags');
+    if (categoryContainer) {
+        categoryContainer.innerHTML = '';
+        material.categories.forEach(category => {
+            const tag = document.createElement('span');
+            tag.className = 'px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full';
+            tag.textContent = category;
+            categoryContainer.appendChild(tag);
+        });
+    }
+    
+    // Load integration tags
+    const integrationContainer = document.getElementById('integration-tags');
+    if (integrationContainer) {
+        integrationContainer.innerHTML = '';
+        material.subjects.forEach(subject => {
+            const tag = document.createElement('span');
+            tag.className = 'px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full';
+            tag.textContent = subject;
+            integrationContainer.appendChild(tag);
+        });
+    }
+    
+    // Load keyword tags
+    const keywordContainer = document.getElementById('keyword-tags');
+    if (keywordContainer) {
+        keywordContainer.innerHTML = '';
+        material.keywords.forEach(keyword => {
+            const tag = document.createElement('span');
+            tag.className = 'px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full';
+            tag.textContent = keyword;
+            keywordContainer.appendChild(tag);
+        });
+    }
+    
+    // Load learning outcomes
+    const outcomesContainer = document.getElementById('learning-outcomes');
+    if (outcomesContainer) {
+        outcomesContainer.innerHTML = '';
+        material.learningOutcomes.forEach(outcome => {
+            const li = document.createElement('li');
+            li.className = 'flex items-start';
+            li.innerHTML = `
+                <span class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                ${outcome}
+            `;
+            outcomesContainer.appendChild(li);
+        });
+    }
 }
 
 /**
@@ -249,21 +310,50 @@ function loadBundleData() {
         materialsList.appendChild(materialDiv);
     });
     
-    // Load tags
+    // Load integration tags
+    const integrationContainer = document.getElementById('integration-tags');
+    if (integrationContainer) {
+        integrationContainer.innerHTML = '';
+        bundle.subjects.forEach(subject => {
+            const tag = document.createElement('span');
+            tag.className = 'px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full';
+            tag.textContent = subject;
+            integrationContainer.appendChild(tag);
+        });
+    }
+
+    // Load header tags (keywords in header)
+    const headerTagsContainer = document.getElementById('header-tags');
+    if (headerTagsContainer) {
+        headerTagsContainer.innerHTML = '';
+        
+        const headerTags = ['liiklus', 'ohutus', 'märgid', 'jalakäija', 'sõidutee'];
+        headerTags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full';
+            tagElement.textContent = tag;
+            headerTagsContainer.appendChild(tagElement);
+        });
+    }
+
+    // Load grade badge
+    const gradeBadge = document.getElementById('grade-badge');
+    if (gradeBadge) gradeBadge.textContent = bundle.grade;
+
+    // Load tags (in content section)
     const tagsContainer = document.getElementById('tags-container');
-    tagsContainer.innerHTML = '';
-    
-    const gradeTag = document.createElement('span');
-    gradeTag.className = 'px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full';
-    gradeTag.textContent = bundle.grade;
-    tagsContainer.appendChild(gradeTag);
-    
-    bundle.subjects.forEach(subject => {
-        const tag = document.createElement('span');
-        tag.className = 'px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-xs rounded-full';
-        tag.textContent = subject;
-        tagsContainer.appendChild(tag);
-    });
+    if (tagsContainer) {
+        tagsContainer.innerHTML = '';
+        
+        // Add some sample tags
+        const sampleTags = ['jalgrattur', 'ohutus', 'kiiver', 'liiklus', 'kontroll'];
+        sampleTags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full';
+            tagElement.textContent = tag;
+            tagsContainer.appendChild(tagElement);
+        });
+    }
 }
 
 // =============================================================================
