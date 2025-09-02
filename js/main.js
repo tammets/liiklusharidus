@@ -14,7 +14,7 @@ function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
-    
+
     mobileMenu.classList.toggle('hidden');
     menuIcon.classList.toggle('hidden');
     closeIcon.classList.toggle('hidden');
@@ -32,26 +32,26 @@ function filterMaterials() {
     const categorySelect = document.querySelectorAll('select')[0];
     const subjectSelect = document.querySelectorAll('select')[1];
     const gradeSelect = document.querySelectorAll('select')[2];
-    
+
     const searchTerm = searchInput.value.toLowerCase();
     const selectedCategory = categorySelect.value;
     const selectedSubject = subjectSelect.value;
     const selectedGrade = gradeSelect.value;
-    
+
     const materialCards = document.querySelectorAll('.material-card');
     let visibleCount = 0;
-    
+
     materialCards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         const categories = card.dataset.category.split(',');
         const subjects = card.dataset.subject.split(',');
         const grade = card.dataset.grade;
-        
+
         const matchesSearch = title.includes(searchTerm);
         const matchesCategory = !selectedCategory || categories.includes(selectedCategory);
         const matchesSubject = !selectedSubject || subjects.includes(selectedSubject);
         const matchesGrade = !selectedGrade || grade === selectedGrade;
-        
+
         if (matchesSearch && matchesCategory && matchesSubject && matchesGrade) {
             card.style.display = 'block';
             visibleCount++;
@@ -59,7 +59,7 @@ function filterMaterials() {
             card.style.display = 'none';
         }
     });
-    
+
     document.getElementById('results-count').textContent = `Leitud ${visibleCount} materjali`;
 }
 
@@ -70,23 +70,23 @@ function filterBundles() {
     const searchInput = document.querySelector('input[type="text"]');
     const durationSelect = document.querySelectorAll('select')[0];
     const difficultySelect = document.querySelectorAll('select')[1];
-    
+
     const searchTerm = searchInput.value.toLowerCase();
     const selectedDuration = durationSelect.value;
     const selectedDifficulty = difficultySelect.value;
-    
+
     const bundleCards = document.querySelectorAll('.bundle-card');
     let visibleCount = 0;
-    
+
     bundleCards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         const duration = card.dataset.duration;
         const difficulty = card.dataset.difficulty;
-        
+
         const matchesSearch = title.includes(searchTerm);
         const matchesDuration = !selectedDuration || duration === selectedDuration;
         const matchesDifficulty = !selectedDifficulty || difficulty === selectedDifficulty;
-        
+
         if (matchesSearch && matchesDuration && matchesDifficulty) {
             card.style.display = 'block';
             visibleCount++;
@@ -94,7 +94,7 @@ function filterBundles() {
             card.style.display = 'none';
         }
     });
-    
+
     document.getElementById('results-count').textContent = `Leitud ${visibleCount} sisukimpu`;
 }
 
@@ -108,7 +108,7 @@ function filterBundles() {
 function loadMaterialData() {
     const urlParams = new URLSearchParams(window.location.search);
     const materialId = urlParams.get('id') || '1';
-    
+
     const materials = {
         '1': {
             title: 'Sõnu liiklusest 3',
@@ -151,28 +151,28 @@ function loadMaterialData() {
             ]
         }
     };
-    
+
     const material = materials[materialId] || materials['1'];
-    
+
     // Update title
     const titleElement = document.getElementById('title');
     if (titleElement) titleElement.textContent = material.title;
-    
+
     // Update image
     const imageElement = document.getElementById('material-image');
     if (imageElement) {
         imageElement.src = material.image;
         imageElement.alt = material.title;
     }
-    
+
     // Update grade badge
     const gradeBadge = document.getElementById('grade-badge');
     if (gradeBadge) gradeBadge.textContent = material.grade;
-    
+
     // Update theme
     const themeElement = document.getElementById('theme');
     if (themeElement) themeElement.textContent = material.theme;
-    
+
     // Load category tags
     const categoryContainer = document.getElementById('category-tags');
     if (categoryContainer) {
@@ -184,7 +184,7 @@ function loadMaterialData() {
             categoryContainer.appendChild(tag);
         });
     }
-    
+
     // Load integration tags
     const integrationContainer = document.getElementById('integration-tags');
     if (integrationContainer) {
@@ -196,19 +196,19 @@ function loadMaterialData() {
             integrationContainer.appendChild(tag);
         });
     }
-    
+
     // Load keyword tags
     const keywordContainer = document.getElementById('keyword-tags');
     if (keywordContainer) {
         keywordContainer.innerHTML = '';
         material.keywords.forEach(keyword => {
             const tag = document.createElement('span');
-            tag.className = 'px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full';
+            tag.className = 'px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full cursor-pointer hover:bg-slate-200 hover:text-slate-900 transition-colors';
             tag.textContent = keyword;
             keywordContainer.appendChild(tag);
         });
     }
-    
+
     // Load learning outcomes
     const outcomesContainer = document.getElementById('learning-outcomes');
     if (outcomesContainer) {
@@ -218,7 +218,7 @@ function loadMaterialData() {
             li.className = 'flex items-start';
             li.innerHTML = `
                 <span class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                ${outcome}
+                <span><span class="font-medium whitespace-nowrap">${material.grade} - ${material.theme} - </span>${outcome}</span>
             `;
             outcomesContainer.appendChild(li);
         });
@@ -231,7 +231,7 @@ function loadMaterialData() {
 function loadBundleData() {
     const urlParams = new URLSearchParams(window.location.search);
     const bundleId = urlParams.get('id') || '1';
-    
+
     const bundles = {
         '1': {
             title: 'Liiklusohutuse põhikursus',
@@ -276,20 +276,20 @@ function loadBundleData() {
             ]
         }
     };
-    
+
     const bundle = bundles[bundleId] || bundles['1'];
-    
+
     document.getElementById('bundle-title').textContent = bundle.title;
     document.getElementById('title').textContent = bundle.title;
     document.getElementById('description').textContent = bundle.description;
     document.getElementById('category-badge').textContent = bundle.category;
     document.getElementById('duration').textContent = bundle.duration;
     document.getElementById('difficulty').textContent = bundle.difficulty;
-    
+
     // Load materials
     const materialsList = document.getElementById('materials-list');
     materialsList.innerHTML = '';
-    
+
     bundle.materials.forEach((material, index) => {
         const materialDiv = document.createElement('div');
         materialDiv.className = 'flex items-center justify-between p-4 bg-slate-50 rounded-lg';
@@ -309,7 +309,7 @@ function loadBundleData() {
         `;
         materialsList.appendChild(materialDiv);
     });
-    
+
     // Load integration tags
     const integrationContainer = document.getElementById('integration-tags');
     if (integrationContainer) {
@@ -326,7 +326,7 @@ function loadBundleData() {
     const headerTagsContainer = document.getElementById('header-tags');
     if (headerTagsContainer) {
         headerTagsContainer.innerHTML = '';
-        
+
         const headerTags = ['liiklus', 'ohutus', 'märgid', 'jalakäija', 'sõidutee'];
         headerTags.forEach(tag => {
             const tagElement = document.createElement('span');
@@ -344,7 +344,7 @@ function loadBundleData() {
     const tagsContainer = document.getElementById('tags-container');
     if (tagsContainer) {
         tagsContainer.innerHTML = '';
-        
+
         // Add some sample tags
         const sampleTags = ['jalgrattur', 'ohutus', 'kiiver', 'liiklus', 'kontroll'];
         sampleTags.forEach(tag => {
@@ -357,25 +357,125 @@ function loadBundleData() {
 }
 
 // =============================================================================
+// TEACHER WORKBOOK FUNCTIONS
+// =============================================================================
+
+/**
+ * Smooth scrolling for navigation
+ */
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+}
+
+/**
+ * Scenario tab functionality for teacher workbook
+ */
+function showScenario(scenarioId) {
+    // Hide all scenario contents
+    const scenarios = document.querySelectorAll('.scenario-content');
+    scenarios.forEach(scenario => {
+        scenario.classList.add('hidden');
+    });
+
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.scenario-tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active', 'bg-purple-100', 'text-purple-700');
+        tab.classList.add('text-slate-600', 'hover:bg-slate-100');
+    });
+
+    // Show selected scenario
+    const selectedScenario = document.getElementById(scenarioId);
+    if (selectedScenario) {
+        selectedScenario.classList.remove('hidden');
+    }
+
+    // Add active class to selected tab
+    const activeTab = document.getElementById('tab-' + scenarioId);
+    if (activeTab) {
+        activeTab.classList.add('active', 'bg-purple-100', 'text-purple-700');
+        activeTab.classList.remove('text-slate-600', 'hover:bg-slate-100');
+    }
+}
+
+// =============================================================================
 // INITIALIZATION
 // =============================================================================
 
 /**
  * Initialize page-specific functionality when DOM is loaded
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Check which page we're on and load appropriate data
     const currentPage = window.location.pathname.split('/').pop();
-    
-    switch(currentPage) {
+
+    switch (currentPage) {
         case 'material-detail.html':
             loadMaterialData();
             break;
         case 'bundle-detail.html':
             loadBundleData();
             break;
+        case 'teacher-workbook.html':
+            initializeTeacherWorkbook();
+            break;
         default:
             // No specific initialization needed for other pages
             break;
     }
+
+    // Initialize smooth scrolling for all anchor links
+    initializeSmoothScrolling();
 });
+
+/**
+ * Initialize teacher workbook specific functionality
+ */
+function initializeTeacherWorkbook() {
+    // Add scroll-based navigation highlighting
+    window.addEventListener('scroll', function () {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('bg-blue-100', 'text-blue-600');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('bg-blue-100', 'text-blue-600');
+            }
+        });
+    });
+}
+
+/**
+ * Initialize smooth scrolling for anchor links
+ */
+function initializeSmoothScrolling() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
