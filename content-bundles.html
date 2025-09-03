@@ -105,31 +105,172 @@
 
             <!-- Search and filters -->
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-8">
-                <div class="grid gap-4 md:grid-cols-4">
-                    <div class="md:col-span-2">
-                        <div class="relative">
-                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <!-- Search box -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Märksõnad</label>
+                    <div class="relative">
+                        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Otsi sisukimpe..." 
+                               class="w-full pl-10 pr-12 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               onkeyup="filterBundles()">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
-                            <input type="text" placeholder="Otsi sisukimpe..." 
-                                   class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                   onkeyup="filterBundles()">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Advanced filters -->
+                <div class="border-t border-slate-200 pt-6">
+                    <div class="mb-4">
+                        <button onclick="toggleAdvancedFilters()" class="flex items-center text-slate-700 hover:text-slate-900 font-medium">
+                            <svg id="filter-chevron" class="w-4 h-4 mr-2 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                            Täpsemad valikud
+                        </button>
+                    </div>
+
+                    <div id="advanced-filters" class="hidden space-y-4">
+                        <!-- Duration Filter -->
+                        <div class="filter-section">
+                            <button onclick="toggleFilterSection('duration')" class="flex items-center justify-between w-full p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                                <span class="font-medium text-slate-700">Kestus</span>
+                                <svg class="w-4 h-4 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="duration-options" class="hidden mt-2 pl-4 space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Alla 30 minuti" class="duration-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Alla 30 minuti</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Üle 30 minuti" class="duration-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Üle 30 minuti</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Üle 60 minuti" class="duration-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Üle 60 minuti</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Difficulty Filter -->
+                        <div class="filter-section">
+                            <button onclick="toggleFilterSection('difficulty')" class="flex items-center justify-between w-full p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                                <span class="font-medium text-slate-700">Keerukusaste</span>
+                                <svg class="w-4 h-4 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="difficulty-options" class="hidden mt-2 pl-4 space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Lihtne" class="difficulty-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Lihtne</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Keskmine" class="difficulty-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Keskmine</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Keerukas" class="difficulty-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Keerukas</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Categories Filter -->
+                        <div class="filter-section">
+                            <button onclick="toggleFilterSection('categories')" class="flex items-center justify-between w-full p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                                <span class="font-medium text-slate-700">Kategooriad</span>
+                                <svg class="w-4 h-4 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="categories-options" class="hidden mt-2 pl-4 space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Üldine liiklusohutus" class="category-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Üldine liiklusohutus</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Jalgratturi ohutus" class="category-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Jalgratturi ohutus</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Liiklusmärgid" class="category-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Liiklusmärgid</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Jalakäija ohutus" class="category-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Jalakäija ohutus</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Integration/Subjects Filter -->
+                        <div class="filter-section">
+                            <button onclick="toggleFilterSection('subjects')" class="flex items-center justify-between w-full p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                                <span class="font-medium text-slate-700">Lõiming</span>
+                                <svg class="w-4 h-4 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="subjects-options" class="hidden mt-2 pl-4 space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Eesti keel" class="subject-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Eesti keel</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Loodusõpetus" class="subject-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Loodusõpetus</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Inimeseõpetus" class="subject-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Inimeseõpetus</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Kehaline kasvatus" class="subject-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Kehaline kasvatus</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="Liikumisõpetus" class="subject-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">Liikumisõpetus</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- School Levels Filter -->
+                        <div class="filter-section">
+                            <button onclick="toggleFilterSection('grades')" class="flex items-center justify-between w-full p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                                <span class="font-medium text-slate-700">Kooliastmed</span>
+                                <svg class="w-4 h-4 text-slate-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="grades-options" class="hidden mt-2 pl-4 space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="I kooliaste" class="grade-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">I kooliaste</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="II kooliaste" class="grade-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">II kooliaste</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="III kooliaste" class="grade-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">III kooliaste</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" value="I-II kooliaste" class="grade-filter mr-2 rounded border-slate-300 text-blue-600 focus:ring-blue-500" onchange="filterBundles()">
+                                    <span class="text-sm text-slate-600">I-II kooliaste</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    
-                    <select class="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="filterBundles()">
-                        <option value="">Kestus</option>
-                        <option value="Alla 30 minuti">Alla 30 minuti</option>
-                        <option value="Üle 30 minuti">Üle 30 minuti</option>
-                        <option value="Üle 60 minuti">Üle 60 minuti</option>
-                    </select>
-
-                    <select class="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="filterBundles()">
-                        <option value="">Keerukusaste</option>
-                        <option value="Lihtne">Lihtne</option>
-                        <option value="Keskmine">Keskmine</option>
-                        <option value="Keerukas">Keerukas</option>
-                    </select>
                 </div>
             </div>
 
@@ -146,7 +287,10 @@
                     <div class="bundle-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200" 
                          data-title="Liiklusohutuse põhikursus" 
                          data-duration="Üle 60 minuti" 
-                         data-difficulty="Lihtne">
+                         data-difficulty="Lihtne"
+                         data-category="Üldine liiklusohutus"
+                         data-subjects="Loodusõpetus,Inimeseõpetus"
+                         data-grade="I kooliaste">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">
@@ -205,7 +349,10 @@
                     <div class="bundle-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200" 
                          data-title="Jalgratturi teekond" 
                          data-duration="Alla 30 minuti" 
-                         data-difficulty="Keskmine">
+                         data-difficulty="Keskmine"
+                         data-category="Jalgratturi ohutus"
+                         data-subjects="Kehaline kasvatus,Loodusõpetus"
+                         data-grade="II kooliaste">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">
@@ -264,7 +411,10 @@
                     <div class="bundle-card bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-slate-200" 
                          data-title="Liiklusmärkide maailm" 
                          data-duration="Alla 30 minuti" 
-                         data-difficulty="Keerukas">
+                         data-difficulty="Keerukas"
+                         data-category="Liiklusmärgid"
+                         data-subjects="Loodusõpetus,Eesti keel"
+                         data-grade="I-II kooliaste">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">

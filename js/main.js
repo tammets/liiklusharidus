@@ -67,13 +67,15 @@ function filterMaterials() {
  * Filter content bundles based on search criteria
  */
 function filterBundles() {
-    const searchInput = document.querySelector('input[type="text"]');
-    const durationSelect = document.querySelectorAll('select')[0];
-    const difficultySelect = document.querySelectorAll('select')[1];
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
 
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedDuration = durationSelect.value;
-    const selectedDifficulty = difficultySelect.value;
+    // Get selected filters
+    const selectedDurations = getSelectedCheckboxValues('.duration-filter');
+    const selectedDifficulties = getSelectedCheckboxValues('.difficulty-filter');
+    const selectedCategories = getSelectedCheckboxValues('.category-filter');
+    const selectedSubjects = getSelectedCheckboxValues('.subject-filter');
+    const selectedGrades = getSelectedCheckboxValues('.grade-filter');
 
     const bundleCards = document.querySelectorAll('.bundle-card');
     let visibleCount = 0;
@@ -82,12 +84,19 @@ function filterBundles() {
         const title = card.dataset.title.toLowerCase();
         const duration = card.dataset.duration;
         const difficulty = card.dataset.difficulty;
+        const category = card.dataset.category;
+        const subjects = card.dataset.subjects ? card.dataset.subjects.split(',') : [];
+        const grade = card.dataset.grade;
 
-        const matchesSearch = title.includes(searchTerm);
-        const matchesDuration = !selectedDuration || duration === selectedDuration;
-        const matchesDifficulty = !selectedDifficulty || difficulty === selectedDifficulty;
+        // Check matches
+        const matchesSearch = !searchTerm || title.includes(searchTerm);
+        const matchesDuration = selectedDurations.length === 0 || selectedDurations.includes(duration);
+        const matchesDifficulty = selectedDifficulties.length === 0 || selectedDifficulties.includes(difficulty);
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+        const matchesSubjects = selectedSubjects.length === 0 || selectedSubjects.some(subject => subjects.includes(subject));
+        const matchesGrade = selectedGrades.length === 0 || selectedGrades.includes(grade);
 
-        if (matchesSearch && matchesDuration && matchesDifficulty) {
+        if (matchesSearch && matchesDuration && matchesDifficulty && matchesCategory && matchesSubjects && matchesGrade) {
             card.style.display = 'block';
             visibleCount++;
         } else {
@@ -95,7 +104,45 @@ function filterBundles() {
         }
     });
 
-    document.getElementById('results-count').textContent = `Leitud ${visibleCount} sisukimpu`;
+    const resultsElement = document.getElementById('results-count');
+    if (resultsElement) {
+        resultsElement.textContent = `Leitud ${visibleCount} sisukimpu`;
+    }
+}
+
+/**
+ * Get selected checkbox values for a given selector
+ */
+function getSelectedCheckboxValues(selector) {
+    const checkboxes = document.querySelectorAll(selector + ':checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+/**
+ * Toggle advanced filters visibility
+ */
+function toggleAdvancedFilters() {
+    const filtersContainer = document.getElementById('advanced-filters');
+    const chevron = document.getElementById('filter-chevron');
+    
+    if (filtersContainer && chevron) {
+        filtersContainer.classList.toggle('hidden');
+        chevron.classList.toggle('rotate-180');
+    }
+}
+
+/**
+ * Toggle individual filter section
+ */
+function toggleFilterSection(sectionId) {
+    const optionsContainer = document.getElementById(sectionId + '-options');
+    const button = optionsContainer?.previousElementSibling;
+    const chevron = button?.querySelector('svg');
+    
+    if (optionsContainer && chevron) {
+        optionsContainer.classList.toggle('hidden');
+        chevron.classList.toggle('rotate-180');
+    }
 }
 
 // =============================================================================
